@@ -35,8 +35,9 @@ RUN if [ $MENDER_VERSION = 2.0.0 ]; then \
     unzip mender-2.0.x.zip; \
     make -C /tmp/mender-2.0.x install-modules-gen; \
 else \
-    curl -Lo mender-$MENDER_VERSION.zip https://github.com/mendersoftware/mender/archive/$MENDER_VERSION.zip; \
-    unzip mender-$MENDER_VERSION.zip; \
+    STRIPPED_VERSION=${MENDER_VERSION#mender-}
+    curl -Lo $MENDER_VERSION.zip https://github.com/mendersoftware/mender/archive/${STRIPPED_VERSION}.zip; \
+    unzip $MENDER_VERSION.zip; \
     make -C /tmp/mender-$MENDER_VERSION install-modules-gen; \
 fi
 
