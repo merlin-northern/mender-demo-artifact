@@ -2,7 +2,8 @@ variables:
   REPO_NAME: github.com/mendersoftware/mender-demo-artifact
   GITHUB_RELEASE_BINARY: mender-demo-artifact
   GITHUB_RELEASE_DEPLOY_REPO: mendersoftware/mender-demo-artifact
-  MENDER_VERSION: '3.2.1'
+  MENDER_CLIENT_TAG_VERSION: '3.2.1'
+  MENDER_VERSION: 'mender-3.2.1'
   MENDER_ARTIFACT_VERSION: '3.7.0'
   INTEGRATION_VERSION: '3.2.1'
   ARTIFACT_NAME: mender-demo-artifact-$INTEGRATION_VERSION
@@ -26,7 +27,7 @@ build:
   services:
     - docker:19.03.5-dind
   script:
-    - docker build -t mender-demo-artifact --build-arg MENDER_ARTIFACT_VERSION=$MENDER_ARTIFACT_VERSION --build-arg MENDER_VERSION=$MENDER_VERSION --build-arg ARTIFACT_NAME=$ARTIFACT_NAME .
+    - docker build -t mender-demo-artifact --build-arg MENDER_ARTIFACT_VERSION=$MENDER_ARTIFACT_VERSION --build-arg MENDER_VERSION=$MENDER_CLIENT_TAG_VERSION --build-arg ARTIFACT_NAME=$ARTIFACT_NAME .
     # Extract artifact
     - mkdir output
     - docker run --rm -v $PWD/output:/output mender-demo-artifact
@@ -69,7 +70,7 @@ test:acceptance:
     - pip3 install --upgrade pip
     - cd tests
     - pip3 install -r requirements.txt
-    - python3 -m pytest -v --mender-version "mender-"$MENDER_VERSION --mender-deb-version $MENDER_DEB_VERSION
+    - python3 -m pytest -v --mender-version $MENDER_VERSION --mender-deb-version $MENDER_DEB_VERSION
 
 publish:s3:
   stage: publish
