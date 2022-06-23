@@ -1,21 +1,23 @@
 version: 2
 updates:
   - commit-message:
-      prefix: "chore"
+      prefix: chore
     directory: /tests
     package-ecosystem: pip
     schedule:
-      interval: weekly
+      interval: monthly
+      day: saturday
   - commit-message:
-      prefix: "chore"
+      prefix: chore
     directory: /
     package-ecosystem: docker
     schedule:
-      interval: weekly
+      interval: monthly
+      day: saturday
   - commit-message:
-      prefix: "chore"
+      prefix: chore
     directory: /
     package-ecosystem: gitsubmodule
     schedule:
-      interval: weekly
-
+      interval: monthly
+      day: saturday
