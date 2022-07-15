@@ -25,7 +25,7 @@ build:
   stage: build
   image: docker:git
   services:
-    - docker:19.03.5-dind
+    - docker:dind
   script:
     - docker build -t mender-demo-artifact --build-arg MENDER_ARTIFACT_VERSION=$MENDER_ARTIFACT_VERSION --build-arg MENDER_VERSION=$MENDER_CLIENT_TAG_VERSION --build-arg ARTIFACT_NAME=$ARTIFACT_NAME .
     # Extract artifact
@@ -37,7 +37,7 @@ build:
 
 test:acceptance:
   stage: test
-  image: docker:19.03-dind
+  image: docker:dind
   tags:
     - mender-qa-slave
   dependencies:
@@ -65,7 +65,7 @@ test:acceptance:
     - git submodule sync --recursive
     - git submodule update --init --recursive
   script:
-    - apk add --update python3 py3-pip bash gcc openssh make openssl-dev
+    - apk add --update python3 py3-pip bash gcc openssh-client make openssl-dev
       libffi-dev libc-dev python3-dev musl-dev rust cargo
     - pip3 install --upgrade pip
     - cd tests
