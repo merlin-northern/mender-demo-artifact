@@ -39,13 +39,13 @@ test:acceptance:
   stage: test
   image: docker:dind
   tags:
-    - mender-qa-slave
+    - mender-qa-worker-generic
   dependencies:
     - build
   variables:
     GIT_SUBMODULE_STRATEGY: recursive
   before_script:
-    # DinD setup in mender-qa-slave
+    # DinD setup in Mender CI runners
     - unset DOCKER_HOST
     - unset DOCKER_TLS_VERIFY
     - unset DOCKER_CERT_PATH
