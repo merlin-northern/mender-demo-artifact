@@ -32,11 +32,11 @@ RUN curl -Lo $MENDER_VERSION.zip https://github.com/mendersoftware/mender/archiv
     unzip $MENDER_VERSION.zip; \
     make -C /tmp/mender-$MENDER_VERSION install-modules-gen;
 
-COPY onboarding-site /var/www/localhost
-WORKDIR /var/www/localhost
+COPY onboarding-site /data/www/localhost
+WORKDIR /data/www/localhost
 RUN mkdir -p htdocs
 RUN cp index.html htdocs
-RUN cp /tmp/busybox_armhf /tmp/busybox_x86_64 /var/www/localhost
+RUN cp /tmp/busybox_armhf /tmp/busybox_x86_64 /data/www/localhost
 
 WORKDIR /tmp
 COPY state-scripts state-scripts
@@ -55,11 +55,11 @@ RUN directory-artifact-gen \
     -t raspberrypi3 \
     -t raspberrypi4 \
     -t raspberrypi \
-    -d /var/www/localhost \
+    -d /data/www/localhost \
     -o mender-demo-artifact.mender \
-    /var/www/localhost \
+    /data/www/localhost \
     -- \
-    --software-filesystem rootfs \
+    --software-filesystem data-partition \
     --software-name mender-demo-artifact \
     --software-version ${MENDER_VERSION} \
     -s state-scripts/ArtifactInstall_Leave_50_choose_busybox_arch \
@@ -81,5 +81,5 @@ RUN ( \
     echo '  docker run --rm -v $PWD/output:/output mender-demo-artifact'; \
     echo; \
     echo "To run the onboarding-site locally, run:"; \
-    echo "  docker run --rm -t -p 8080:80 mender-demo-artifact /var/www/localhost/entrypoint.sh"; \
+    echo "  docker run --rm -t -p 8080:80 mender-demo-artifact /data/www/localhost/entrypoint.sh"; \
     ) 1>&2

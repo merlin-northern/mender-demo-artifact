@@ -6,7 +6,7 @@ DEVICE_TYPE=$(sed -e 's/^device_type=//' /var/lib/mender/device_type 2>/dev/null
 MENDER_VERSION=$(mender -version 2>/dev/null | head -n1)
 MENDER_VERSION=${MENDER_VERSION:-N/A}
 INVENTORY="$(for script in /usr/share/mender/inventory/mender-inventory-*; do $script || true; done)"
-cat >/var/www/localhost/htdocs/device-info.js <<EOF
+cat >/data/www/localhost/htdocs/device-info.js <<EOF
   mender_server = {
     "Web server": "$(hostname)",
     "Server address(es)": "[ $(echo "$INVENTORY" | sed -ne '/^ipv4/{s/^[^=]*=//; s,/.*$,,; p}' | tr '\n' ' ')]"
@@ -23,7 +23,7 @@ cat >/var/www/localhost/htdocs/device-info.js <<EOF
     "kernel": "$(uname -r)"
   }
 EOF
-cd /var/www/localhost/htdocs
+cd /data/www/localhost/htdocs
 ../busybox httpd -f -p 85 &
 BUSYBOX_PID=$!
 # Trick to catch failures: Wait a few seconds for busybox to exit. If it does,
