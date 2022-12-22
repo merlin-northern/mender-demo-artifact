@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Copyright 2019 Northern.tech AS
+# Copyright 2022 Northern.tech AS
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -49,22 +49,22 @@ class TestDemoArtifact():
                 continue
 
     def test_fail_to_install_demo_artifact(self, setup_test_container, setup_tester_ssh_connection):
-        setup_tester_ssh_connection.sudo("rm -rf /var/www/localhost")
+        setup_tester_ssh_connection.sudo("rm -rf /data/www/localhost")
         try:
-            setup_tester_ssh_connection.sudo("mkdir -p /var/www")
+            setup_tester_ssh_connection.sudo("mkdir -p /data/www")
             # Put a file in the way which blocks the package.
-            setup_tester_ssh_connection.run("echo test_content | sudo tee /var/www/localhost")
+            setup_tester_ssh_connection.run("echo test_content | sudo tee /data/www/localhost")
 
             put(setup_tester_ssh_connection, "../output/mender-demo-artifact.mender",
                 key_filename=setup_test_container.key_filename)
             output = setup_tester_ssh_connection.sudo("mender install mender-demo-artifact.mender", warn=True)
             assert output.exited != 0
             setup_tester_ssh_connection.run("! test -f /lib/systemd/system/mender-demo-artifact.service")
-            output = setup_tester_ssh_connection.run("cat /var/www/localhost")
+            output = setup_tester_ssh_connection.run("cat /data/www/localhost")
             assert output.stdout.strip() == "test_content"
 
         finally:
-            setup_tester_ssh_connection.sudo("rm -rf /var/www/localhost")
+            setup_tester_ssh_connection.sudo("rm -rf /data/www/localhost")
 
     def test_install_demo_artifact(self, setup_test_container, setup_tester_ssh_connection):
         put(setup_tester_ssh_connection, "../output/mender-demo-artifact.mender",

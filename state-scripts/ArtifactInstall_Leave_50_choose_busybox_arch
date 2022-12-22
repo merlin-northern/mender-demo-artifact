@@ -4,10 +4,10 @@ set -e
 
 case "$(uname -m)" in
     arm*)
-        cp /var/www/localhost/busybox_armhf /var/www/localhost/busybox
+        cp /data/www/localhost/busybox_armhf /data/www/localhost/busybox
         ;;
     x86_64)
-        cp /var/www/localhost/busybox_x86_64 /var/www/localhost/busybox
+        cp /data/www/localhost/busybox_x86_64 /data/www/localhost/busybox
         ;;
     *)
         echo "No compatible busybox binary for this architecture." 1>&2
