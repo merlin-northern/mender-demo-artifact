@@ -3,9 +3,9 @@ variables:
   GITHUB_RELEASE_BINARY: mender-demo-artifact
   GITHUB_RELEASE_DEPLOY_REPO: mendersoftware/mender-demo-artifact
   MENDER_CLIENT_TAG_VERSION: '3.5.0'
-  MENDER_VERSION: 'mender-3.5.0'
+  MENDER_VERSION: 'mender-3.5.1'
   MENDER_ARTIFACT_VERSION: '3.10.0'
-  INTEGRATION_VERSION: '3.5.0'
+  INTEGRATION_VERSION: '3.5.1'
   ARTIFACT_NAME: mender-demo-artifact-$INTEGRATION_VERSION
   MENDER_DEB_VERSION: '3.5.0'
   S3_BUCKET_NAME: "mender-demo-artifacts"
