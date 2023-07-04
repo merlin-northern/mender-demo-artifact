@@ -3,9 +3,9 @@ RUN apt update
 RUN apt install -y build-essential gcc-arm-linux-gnueabi curl unzip
 
 WORKDIR /tmp
-RUN curl -f -O https://busybox.net/downloads/busybox-1.30.1.tar.bz2
-RUN tar xjf busybox-1.30.1.tar.bz2
-WORKDIR /tmp/busybox-1.30.1
+RUN curl -f -O https://busybox.net/downloads/busybox-1.36.1.tar.bz2
+RUN tar xjf busybox-1.36.1.tar.bz2
+WORKDIR /tmp/busybox-1.36.1
 
 # x86_64
 RUN make distclean
