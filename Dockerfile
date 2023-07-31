@@ -1,11 +1,11 @@
-FROM debian:10
+FROM debian:11
 RUN apt update
 RUN apt install -y build-essential gcc-arm-linux-gnueabi curl unzip
 
 WORKDIR /tmp
-RUN curl -f -O https://busybox.net/downloads/busybox-1.30.1.tar.bz2
-RUN tar xjf busybox-1.30.1.tar.bz2
-WORKDIR /tmp/busybox-1.30.1
+RUN curl -f -O https://busybox.net/downloads/busybox-1.36.1.tar.bz2
+RUN tar xjf busybox-1.36.1.tar.bz2
+WORKDIR /tmp/busybox-1.36.1
 
 # x86_64
 RUN make distclean
@@ -21,8 +21,8 @@ RUN cp busybox /tmp/busybox_armhf
 
 ARG MENDER_ARTIFACT_VERSION=none
 RUN if [ "$MENDER_ARTIFACT_VERSION" = none ]; then echo "MENDER_ARTIFACT_VERSION must be set!" 1>&2; exit 1; fi
-RUN curl -f -o /usr/bin/mender-artifact https://downloads.mender.io/mender-artifact/$MENDER_ARTIFACT_VERSION/linux/mender-artifact
-RUN chmod ugo+x /usr/bin/mender-artifact
+RUN curl -f -O https://downloads.mender.io/repos/debian/pool/main/m/mender-artifact/mender-artifact_$MENDER_ARTIFACT_VERSION-1+debian+$(. /etc/os-release; echo $VERSION_CODENAME)_amd64.deb
+RUN dpkg --install mender-artifact_$MENDER_ARTIFACT_VERSION-1+debian+$(. /etc/os-release; echo $VERSION_CODENAME)_amd64.deb
 
 ARG MENDER_VERSION=none
 RUN if [ "$MENDER_VERSION" = none ]; then echo "MENDER_VERSION must be set!" 1>&2; exit 1; fi
