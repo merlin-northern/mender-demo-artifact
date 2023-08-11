@@ -2,9 +2,10 @@
 <html dir="ltr" lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css" />
     <link
       id="favicon"
       rel="icon"
@@ -28,11 +29,11 @@
       }
       h1 {
         font-size: 20pt;
-        font-weight: bolder;
+        font-weight: 700;
       }
       h2 {
         font-size: 18pt;
-        font-weight: bold;
+        font-weight: 700;
       }
       h3 {
         font-size: 16pt;
@@ -59,7 +60,7 @@
       }
       .box {
         box-shadow: 5px 5px 7.5px 0px #333;
-        padding: min(10%,2.5vh) min(10%,5vh);
+        padding: min(10%, 2.5vh) min(10%, 5vh);
       }
       .attribute {
         flex-direction: row;
@@ -87,7 +88,7 @@
       }
       #top-container .mender-white {
         height: 100%;
-        min-height: max(150px, min(10vh, 300px))
+        min-height: max(150px, min(10vh, 300px));
       }
       #device-transition {
         width: 10px;
@@ -105,37 +106,41 @@
       #device-details > div {
         max-width: 75%;
       }
+      .centered-narrow {
+        max-width: 600px;
+      }
+      .links a,
+      .links li {
+        color: #337a87;
+      }
+      #progress,
+      #next-steps {
+        font-size: 11pt;
+      }
       #progress {
         background-color: #f7f7f7;
+        padding-top: 5%;
       }
-      #progress .centered .container {
-        padding: 10%;
-        padding-bottom: 15%;
+      #progress .links {
+        padding-left: 20px;
+        font-weight: 700;
       }
-      #progress ol {
+      #accomplishments {
         margin-left: 36pt;
       }
-      #progress li {
+      #accomplishments li {
         line-height: 3em;
       }
-      #progress li::before {
-        content: '';
+      #accomplishments li::before {
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZmlsbD0iIzAxNTk2OSIgZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6bS0yIDE1bC01LTUgMS40MS0xLjQxTDEwIDE0LjE3bDcuNTktNy41OUwxOSA4bC05IDl6Ii8+PC9zdmc+);
         background-size: contain;
-        width: 30px;
-        height: 30px;
+        content: '';
         display: inline-block;
-        vertical-align: middle;
+        height: 30px;
         margin-left: -65px;
         margin-right: 35px;
-      }
-      #progress li::before {
-        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZmlsbD0iIzAxNTk2OSIgZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6bS0yIDE1bC01LTUgMS40MS0xLjQxTDEwIDE0LjE3bDcuNTktNy41OUwxOSA4bC05IDl6Ii8+PC9zdmc+);
-      }
-      #progress li:last-of-type {
-        font-weight: bold;
-      }
-      #progress li:last-of-type::before {
-        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjMDE1OTY5IiBkPSJNMTkgMTNINXYtMmgxNHYyeiIvPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48L3N2Zz4=);
+        vertical-align: middle;
+        width: 30px;
       }
       #server-details {
         align-self: flex-end;
@@ -149,11 +154,8 @@
         color: #c09f0a;
       }
       #next-steps {
-        max-width: 1000px;
-        padding: 10%;
-        padding-bottom: 60px;
-        margin-bottom: 20%;
-        border-bottom: 1px solid #efefef;
+        padding-top: 45px;
+        padding-bottom: 15%;
       }
       .text-container {
         margin: 45px 0;
@@ -161,15 +163,29 @@
       .mender-green {
         background-color: #015969;
       }
+      .mender-red {
+        background-color: #5d0f43;
+      }
+      .mender-red-outlined {
+        background-color: none;
+        border-color: #5d0f43;
+        color: #5d0f43;
+      }
       .mender-button {
-        border: none;
-        padding: 15px 25px;
-        font-weight: 400;
-        text-align: center;
-        vertical-align: middle;
         border-radius: 4px;
+        border: none;
         cursor: pointer;
         display: inline-block;
+        font-weight: 700;
+        margin-right: 10px;
+        padding: 8px 24px;
+        text-align: center;
+        vertical-align: middle;
+      }
+      .mender-button-outlined {
+        background-color: none;
+        border-radius: 4px;
+        border: 1px solid;
       }
     </style>
   </head>
@@ -180,9 +196,7 @@
           <code id="server-details"></code>
           <div id="congratulations" class="box">
             <h1>Congratulations!</h1>
-            <p class="text-container">
-              If you're reading this page, you know you've successfully updated your device with Mender!
-            </p>
+            <p class="text-container">If you're reading this page, you know you've successfully updated your device with Mender!</p>
             <p class="text-container">
               The application update downloaded and installed on your device, starting this simple webserver and webpage. You should see some details about your
               device below, to confirm it's really running on your device.
@@ -201,27 +215,43 @@
     </div>
 
     <div id="progress">
-      <div class="centered">
+      <div class="centered centered-narrow">
         <div class="container">
-          <h2>Your progress so far:</h2>
-          <ol>
+          <h3>So far you have:</h3>
+          <ol id="accomplishments">
             <li>Connected a device</li>
-            <li>Deployed an application update</li>
-            <li>Create your own Release and deploy it</li>
+            <li>Deployed your first simple application update</li>
           </ol>
+          <h3>What's next?</h3>
+          <p>
+            You've now got a good foundation in how to use the Mender UI. Look for more tooltips as you go, to learn about more features.
+            <br />
+            <br />
+            We recommend visiting the documentation for the following tutorials.
+          </p>
+
+          <div class="text-container">
+            Learn how to:
+            <ol class="links">
+              <li>
+                <a href="https://docs.mender.io/get-started/deploy-an-application-update#step-2-modify-the-application"
+                  >Create a Release using the UI, and deploy it</a
+                >
+              </li>
+              <li>
+                <a href="https://docs.mender.io/get-started/deploy-an-operating-system-update">Deploy an Operating System update</a>
+              </li>
+              <li>
+                <a href="https://docs.mender.io/get-started/deploy-a-container-update">Deploy a Container update</a>
+              </li>
+            </ol>
+          </div>
         </div>
       </div>
     </div>
-    <div id="next-steps" class="centered">
-      <h3>Next step: create your own Release and deploy it to your device</h3>
-      <div class="text-container">
-        <p>
-          You've updated your device with this webserver application update, which we provided out of the box. The next step is to create a new Release
-          and deploy it to your device.
-        </p>
-        <p>Return to the Mender GUI to follow the instructions.</p>
-      </div>
-      <a class="mender-button mender-green">Back to the Mender GUI</a>
+    <div id="next-steps" class="centered centered-narrow">
+      <a class="mender-button mender-red" href="https://docs.mender.io">Go to the documentation</a>
+      <a id="back-to-ui" class="mender-button mender-button-outlined mender-red-outlined">Back to the Mender UI</a>
     </div>
     <script src="device-info.js" type="application/javascript"></script>
     <script>
@@ -240,8 +270,8 @@
       let inventory = document.querySelector('#device-inventory');
       Object.entries(mender_inventory).map(([name, value]) => inventory.appendChild(mapToAttributeContainer(name, value, 'inventory-item')));
 
-      const backLink = document.querySelector('#next-steps a');
-      backLink.addEventListener('click', evt => {
+      const backLink = document.querySelector('#back-to-ui');
+      backLink.addEventListener('click', (evt) => {
         evt.preventDefault();
         const searchParams = new URLSearchParams(window.location.search);
         const source = searchParams.has('source') ? decodeURIComponent(searchParams.get('source')) : 'https://hosted.mender.io/ui/#/releases';
