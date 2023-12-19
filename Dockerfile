@@ -47,6 +47,7 @@ RUN directory-artifact-gen \
     -t beaglebone \
     -t beaglebone-yocto \
     -t beaglebone-yocto-grub \
+    -t docker-client \
     -t generic-armv6 \
     -t generic-x86_64 \
     -t qemux86-64 \
