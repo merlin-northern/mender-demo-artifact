@@ -1,6 +1,5 @@
 FROM debian:11
-RUN apt update
-RUN apt install -y build-essential gcc-arm-linux-gnueabi curl unzip
+RUN apt update && apt install -y build-essential gcc-arm-linux-gnueabi curl unzip cmake
 
 WORKDIR /tmp
 RUN curl -f -O https://busybox.net/downloads/busybox-1.36.1.tar.bz2
@@ -28,8 +27,12 @@ ARG MENDER_VERSION=none
 RUN if [ "$MENDER_VERSION" = none ]; then echo "MENDER_VERSION must be set!" 1>&2; exit 1; fi
 WORKDIR /tmp
 
+# NOTE: the sed command below can be removed when upgrading to newer debian version. See:
+# https://github.com/mendersoftware/mender/pull/1556
 RUN curl -Lo $MENDER_VERSION.zip https://github.com/mendersoftware/mender/archive/${MENDER_VERSION}.zip; \
     unzip $MENDER_VERSION.zip; \
+    cmake -S /tmp/mender-$MENDER_VERSION -B /tmp/mender-$MENDER_VERSION -D MENDER_NO_BUILD=1 || true; \
+    sed -i 's|component=|component |g' /tmp/mender-$MENDER_VERSION/support/CMakeLists.txt || true; \
     make -C /tmp/mender-$MENDER_VERSION install-modules-gen;
 
 COPY onboarding-site /data/www/localhost
