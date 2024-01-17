@@ -64,6 +64,8 @@ test:acceptance:
     - apk add git
     - git submodule sync --recursive
     - git submodule update --init --recursive
+    # Log in to pull test image from registry.gitlab.com
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
   script:
     - apk add --update python3 py3-pip bash gcc openssh-client make openssl-dev
       libffi-dev libc-dev python3-dev musl-dev rust cargo
