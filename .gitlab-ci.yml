@@ -2,12 +2,12 @@ variables:
   REPO_NAME: github.com/mendersoftware/mender-demo-artifact
   GITHUB_RELEASE_BINARY: mender-demo-artifact
   GITHUB_RELEASE_DEPLOY_REPO: mendersoftware/mender-demo-artifact
-  MENDER_CLIENT_TAG_VERSION: '3.5.2'
-  MENDER_VERSION: 'mender-3.7.0'
-  MENDER_ARTIFACT_VERSION: '3.11.0'
-  INTEGRATION_VERSION: '3.7.0'
+  MENDER_CLIENT_TAG_VERSION: '4.0.0'
+  MENDER_VERSION: 'mender-3.7.1'
+  MENDER_ARTIFACT_VERSION: '3.11.1'
+  INTEGRATION_VERSION: '3.7.1'
   ARTIFACT_NAME: mender-demo-artifact-$INTEGRATION_VERSION
-  MENDER_DEB_VERSION: '3.5.2'
+  MENDER_DEB_VERSION: '4.0.0'
   S3_BUCKET_NAME: "mender-demo-artifacts"
 
 stages:
@@ -64,6 +64,8 @@ test:acceptance:
     - apk add git
     - git submodule sync --recursive
     - git submodule update --init --recursive
+    # Log in to pull test image from registry.gitlab.com
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
   script:
     - apk add --update python3 py3-pip bash gcc openssh-client make openssl-dev
       libffi-dev libc-dev python3-dev musl-dev rust cargo
