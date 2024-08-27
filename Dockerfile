@@ -1,4 +1,4 @@
-FROM debian:11
+FROM debian:12
 RUN apt update && apt install -y build-essential gcc-arm-linux-gnueabi curl unzip cmake
 
 WORKDIR /tmp
