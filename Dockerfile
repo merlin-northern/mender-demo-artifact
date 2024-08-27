@@ -1,5 +1,5 @@
 FROM debian:12
-RUN apt update && apt install -y build-essential gcc-arm-linux-gnueabi curl unzip cmake
+RUN apt update && apt install -y build-essential gcc-arm-linux-gnueabi gcc-aarch64-linux-gnu curl unzip cmake
 
 WORKDIR /tmp
 RUN curl -f -O https://busybox.net/downloads/busybox-1.36.1.tar.bz2
@@ -12,11 +12,17 @@ RUN make -j$(nproc) defconfig
 RUN make -j$(nproc)
 RUN cp busybox /tmp/busybox_x86_64
 
-# ARM
+# ARM 32 bits
 RUN make distclean
 RUN env CROSS_COMPILE=arm-linux-gnueabi- LDFLAGS=-static make -j$(nproc) defconfig
 RUN env CROSS_COMPILE=arm-linux-gnueabi- LDFLAGS=-static make -j$(nproc)
 RUN cp busybox /tmp/busybox_armhf
+
+# ARM 64 bits
+RUN make distclean
+RUN env CROSS_COMPILE=aarch64-linux-gnu- LDFLAGS=-static make -j$(nproc) defconfig
+RUN env CROSS_COMPILE=aarch64-linux-gnu- LDFLAGS=-static make -j$(nproc)
+RUN cp busybox /tmp/busybox_arm64
 
 ARG MENDER_ARTIFACT_VERSION=none
 RUN if [ "$MENDER_ARTIFACT_VERSION" = none ]; then echo "MENDER_ARTIFACT_VERSION must be set!" 1>&2; exit 1; fi
@@ -39,7 +45,7 @@ COPY onboarding-site /data/www/localhost
 WORKDIR /data/www/localhost
 RUN mkdir -p htdocs
 RUN cp index.html htdocs
-RUN cp /tmp/busybox_armhf /tmp/busybox_x86_64 /data/www/localhost
+RUN cp /tmp/busybox_x86_64 /tmp/busybox_armhf /tmp/busybox_arm64 /data/www/localhost
 
 WORKDIR /tmp
 COPY state-scripts state-scripts
@@ -58,6 +64,7 @@ RUN directory-artifact-gen \
     -t raspberrypi0-wifi \
     -t raspberrypi3 \
     -t raspberrypi4 \
+    -t raspberrypi4_64 \
     -t raspberrypi \
     -d /data/www/localhost \
     -o mender-demo-artifact.mender \
