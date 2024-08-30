@@ -3,6 +3,9 @@
 set -e
 
 case "$(uname -m)" in
+    aarch64)
+        cp /data/www/localhost/busybox_arm64 /data/www/localhost/busybox
+        ;;
     arm*)
         cp /data/www/localhost/busybox_armhf /data/www/localhost/busybox
         ;;
