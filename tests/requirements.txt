@@ -4,51 +4,25 @@
 #
 #    pip-compile tests/requirements.in
 #
-bcrypt==4.0.1
-    # via paramiko
 certifi==2024.7.4
     # via requests
-cffi==1.15.1
-    # via
-    #   cryptography
-    #   pynacl
 charset-normalizer==3.1.0
     # via requests
-cryptography==43.0.1
-    # via paramiko
-decorator==5.1.1
-    # via fabric
-deprecated==1.2.14
-    # via fabric
 exceptiongroup==1.1.3
     # via pytest
-fabric==3.2.2
-    # via -r requirements.in
 idna==3.7
     # via requests
 iniconfig==2.0.0
     # via pytest
-invoke==2.1.3
-    # via fabric
 packaging==23.1
     # via pytest
-paramiko==3.4.0
-    # via
-    #   -r requirements.in
-    #   fabric
 pluggy==1.5.0
     # via pytest
-pycparser==2.21
-    # via cffi
-pynacl==1.5.0
-    # via paramiko
 pytest==8.3.2
-    # via -r requirements.in
+    # via -r tests/requirements.in
 requests==2.32.3
-    # via -r requirements.in
+    # via -r tests/requirements.in
 tomli==2.0.1
     # via pytest
 urllib3==1.26.19
     # via requests
-wrapt==1.15.0
-    # via deprecated
