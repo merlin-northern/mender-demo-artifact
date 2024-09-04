@@ -1,4 +1,2 @@
 pytest==8.3.2
-fabric==3.2.2
 requests==2.32.3
-paramiko==3.4.0
